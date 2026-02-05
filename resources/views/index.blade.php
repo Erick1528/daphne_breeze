@@ -7,5 +7,10 @@
 @endsection
 
 @section('content')
-
+    <livewire:rooms />
+    <livewire:restaurant />
+    <livewire:offers />
+    <livewire:map-location />
+    <livewire:reservation-options />
+    <livewire:contact-form />
 @endsection
