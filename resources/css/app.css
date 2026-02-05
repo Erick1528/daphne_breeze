@@ -18,3 +18,7 @@
     --color-caribeOrange: #D08E36;
 
 }
+
+[x-cloak] {
+    display: none !important;
+}
