@@ -1,4 +1,4 @@
-<div class="mt-[80px] sm:mt-[120px] w-full max-w-7xl mx-auto px-4 sm:px-6"
+<section id="habitaciones" class="mt-[80px] sm:mt-[120px] w-full max-w-7xl mx-auto px-4 sm:px-6 scroll-mt-[100px]"
     x-data="{
         current: 0,
         total: {{ count($rooms) }},
@@ -20,7 +20,7 @@
         <div class="overflow-x-auto snap-x snap-mandatory scroll-smooth flex gap-4 pb-4 -mx-1 md:mx-0 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
             x-ref="carousel">
             @foreach ($rooms as $index => $room)
-                <a href="#" class="flex-shrink-0 w-[min(85vw,100%)] sm:w-[min(70vw,100%)] md:w-[400px] max-w-full snap-center group">
+                <a href="{{ route('rooms.show', $room['id']) }}" class="flex-shrink-0 w-[min(85vw,100%)] sm:w-[min(70vw,100%)] md:w-[400px] max-w-full snap-center group">
                     <div class="rounded-[12px] overflow-hidden aspect-[4/5] md:aspect-[5/6] relative bg-bgGray">
                         <img src="{{ asset($room['image']) }}" alt="{{ $room['title'] }}"
                             class="w-full h-full object-cover rounded-[12px] group-hover:scale-105 transition-transform duration-300">
@@ -72,4 +72,4 @@
             </button>
         @endforeach
     </div>
-</div>
+</section>
