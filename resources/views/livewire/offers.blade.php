@@ -1,4 +1,4 @@
-<div class="mt-[80px] sm:mt-[120px] w-full max-w-7xl mx-auto px-4 sm:px-6">
+<section id="ofertas" class="mt-[80px] sm:mt-[120px] w-full max-w-7xl mx-auto px-4 sm:px-6 scroll-mt-[100px]">
     <div class="mb-8 md:mb-10">
         <h2 class="text-caribeCoffee text-2xl md:text-3xl font-bold">Ofertas</h2>
         <p class="mt-1 text-caribeCoffee/70 italic text-sm md:text-base">Promociones especiales para tu estancia</p>
@@ -16,7 +16,7 @@
                     <p class="text-caribeCoffee/90 text-base md:text-lg leading-relaxed">
                         {{ $offer['description'] }}
                     </p>
-                    <a href="{{ $offer['link'] }}" class="group mt-5 inline-flex items-center gap-1.5 text-caribeOrange font-medium text-sm md:text-base hover:text-caribeCoffee transition-colors duration-200 border-b border-transparent group-hover:border-caribeOrange/50">
+                    <a href="{{ route('offers.show', $offer['id']) }}" class="group mt-5 inline-flex items-center gap-1.5 text-caribeOrange font-medium text-sm md:text-base hover:text-caribeCoffee transition-colors duration-200 border-b border-transparent group-hover:border-caribeOrange/50">
                         Ver oferta
                         <svg class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6L16 12l-6 6"/></svg>
                     </a>
@@ -24,4 +24,13 @@
             </article>
         @endforeach
     </div>
-</div>
+
+    @if (!$showAll && $this->hasMoreOffers)
+        <div class="mt-10 text-center">
+            <a href="{{ route('offers') }}" class="group inline-flex items-center gap-1.5 text-caribeOrange font-medium text-base md:text-lg hover:text-caribeCoffee transition-colors duration-200 border-b border-transparent group-hover:border-caribeOrange/50">
+                Ver más ofertas
+                <svg class="w-5 h-5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6L16 12l-6 6"/></svg>
+            </a>
+        </div>
+    @endif
+</section>

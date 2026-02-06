@@ -2,28 +2,35 @@
 
 namespace App\Livewire;
 
+use App\Models\Offer;
 use Livewire\Component;
 
 class Offers extends Component
 {
     public array $offers = [];
+    public bool $showAll = false;
 
-    public function mount(): void
+    public function mount(bool $showAll = false): void
     {
-        $this->offers = [
-            [
-                'title'       => 'Estancia con desayuno incluido',
-                'description' => 'Reserva dos noches o más y lleva el desayuno incluido. Empieza cada día con café, fruta y opciones locales en nuestro restaurante.',
-                'image'       => 'build/assets/hero.webp',
-                'link'        => '#',
-            ],
-            [
-                'title'       => 'Escapada en pareja',
-                'description' => 'Noche de bienvenida, habitación con las mejores vistas y un detalle especial a tu llegada. Ideal para una escapada romántica.',
-                'image'       => 'build/assets/habitacion doble.jpeg',
-                'link'        => '#',
-            ],
-        ];
+        $this->showAll = $showAll;
+
+        $query = Offer::where('active', true)->orderBy('order')->orderBy('id');
+
+        $allOffers = $query->get()->map(fn (Offer $offer) => [
+            'id'          => $offer->id,
+            'title'       => $offer->title,
+            'description' => $offer->description ?? '',
+            'image'       => $offer->image,
+            'link'        => $offer->link ?? null,
+        ])->toArray();
+
+        $this->offers = $showAll ? $allOffers : array_slice($allOffers, 0, 2);
+    }
+
+    public function getHasMoreOffersProperty(): bool
+    {
+        $total = Offer::where('active', true)->count();
+        return $total > 2;
     }
 
     public function render()
