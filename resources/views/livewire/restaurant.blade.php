@@ -1,4 +1,4 @@
-<div class="mt-[80px] sm:mt-[120px] w-full max-w-7xl mx-auto px-4 sm:px-6">
+<section id="restaurante" class="mt-[80px] sm:mt-[120px] w-full max-w-7xl mx-auto px-4 sm:px-6 scroll-mt-[100px]">
     <div class="mb-6 md:mb-8">
         <h2 class="text-caribeCoffee text-2xl md:text-3xl font-bold">Restaurante</h2>
         <p class="mt-1 text-caribeCoffee/70 italic text-sm md:text-base">Desayuno y almuerzo en un ambiente único</p>
@@ -28,4 +28,4 @@
             <svg class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6L16 12l-6 6"/></svg>
         </a>
     </div>
-</div>
+</section>
