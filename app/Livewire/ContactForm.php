@@ -19,6 +19,18 @@ class ContactForm extends Component
 
     public bool $sent = false;
 
+    public function mount(): void
+    {
+        $subject = request()->query('subject', '');
+        if ($subject !== '') {
+            $this->subject = $subject;
+        }
+        $message = request()->query('message', '');
+        if ($message !== '') {
+            $this->message = $message;
+        }
+    }
+
     protected $rules = [
         'name'    => 'required|string|min:2|max:100',
         'email'   => 'required|email',
