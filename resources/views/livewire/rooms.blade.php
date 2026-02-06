@@ -1,4 +1,4 @@
-<section id="habitaciones" class="mt-[80px] sm:mt-[120px] w-full max-w-7xl mx-auto px-4 sm:px-6 scroll-mt-[100px]"
+<section id="habitaciones" class="mt-[80px] sm:mt-[120px] w-full max-w-7xl mx-auto px-0 sm:px-6 scroll-mt-[100px]"
     x-data="{
         current: 0,
         total: {{ count($rooms) }},

@@ -1,4 +1,4 @@
-<section class="mt-[80px] sm:mt-[120px] w-full max-w-7xl mx-auto px-4 sm:px-6" aria-labelledby="map-heading">
+<section class="mt-[80px] sm:mt-[120px] w-full max-w-7xl mx-auto px-0 sm:px-6" aria-labelledby="map-heading">
     <div class="mb-6 md:mb-8">
         <h2 id="map-heading" class="text-caribeCoffee text-2xl md:text-3xl font-bold">Ubicación</h2>
         <p class="mt-1 text-caribeCoffee/70 italic text-sm md:text-base">Encuéntranos en Omoa</p>

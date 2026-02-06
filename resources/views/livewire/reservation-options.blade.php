@@ -1,4 +1,4 @@
-<div class="mt-[80px] sm:mt-[120px] w-full max-w-7xl mx-auto px-4 sm:px-6 h-fit min-h-0"
+<div class="mt-[80px] sm:mt-[120px] w-full max-w-7xl mx-auto px-0 sm:px-6 h-fit min-h-0"
     x-data="{
         open: false,
         isLg: false,

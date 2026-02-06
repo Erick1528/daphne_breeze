@@ -1,4 +1,4 @@
-<footer class="mt-[80px] sm:mt-[120px] w-full max-w-7xl mx-auto px-4 sm:px-6 pt-8 pb-8 border-t border-caribeCoffee/15">
+<footer class="mt-[80px] sm:mt-[120px] w-full max-w-7xl mx-auto px-0 sm:px-6 pt-8 pb-8 border-t border-caribeCoffee/15">
     <div class="flex flex-col items-center gap-6 md:gap-8">
         <a href="/" class="shrink-0">
             <img src="{{ asset('build/assets/logo.svg') }}" alt="Daphne Breeze" class="h-10 md:h-12">
