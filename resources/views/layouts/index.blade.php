@@ -18,7 +18,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class=" bg-bgGray font-montserrat p-5">
+<body class=" bg-bgGray font-montserrat p-5" style="scroll-behavior: smooth;">
 
     <header class="">
         <livewire:nav-bar>
@@ -33,6 +33,26 @@
 
 
     @livewireScripts
+
+    <script>
+        // Smooth scroll para enlaces de anclas
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    const offsetTop = target.offsetTop - 100; // Compensar navbar
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
