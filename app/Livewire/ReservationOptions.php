@@ -12,7 +12,7 @@ class ReservationOptions extends Component
     /** Teléfono formateado para mostrar. Ej: +504 1234-5678 */
     public string $phoneDisplay = '+504 1234-5678';
 
-    public string $email = 'reservas@daphnebreeze.com';
+    public string $email = 'info@hoteldaphnebreeze.com';
 
     public string $bookingUrl = 'https://www.booking.com';
 
