@@ -9,7 +9,8 @@
                 <li><a href="#inicio" class="hover:text-caribeOrange transition-colors">Inicio</a></li>
                 <li><a href="#habitaciones" class="hover:text-caribeOrange transition-colors">Habitaciones</a></li>
                 <li><a href="#ofertas" class="hover:text-caribeOrange transition-colors">Ofertas</a></li>
-                <li><a href="#reserva" class="hover:text-caribeOrange transition-colors">Reserva</a></li>
+                {{-- <li><a href="#reserva" class="hover:text-caribeOrange transition-colors">Reserva</a></li> --}}
+                <li><a href="#restaurante" class="hover:text-caribeOrange transition-colors">Restaurante</a></li>
                 <li><a href="#contacto" class="hover:text-caribeOrange transition-colors">Contacto</a></li>
             </ul>
         </nav>
