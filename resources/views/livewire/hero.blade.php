@@ -1,4 +1,4 @@
-<section id="inicio" class="scroll-mt-[100px] w-full max-w-7xl mx-auto px-4 sm:px-6">
+<section id="inicio" class="scroll-mt-[100px] mx-auto">
     <div class="xl:grid hidden grid-cols-4 grid-rows-2 h-[780px] w-full rounded-[20px] relative overflow-hidden"
         style="background-image: url('{{ asset('build/assets/hero.webp') }}'); background-size: cover; background-position: center; transform: translateZ(0); backface-visibility: hidden; -webkit-backface-visibility: hidden;">
 
