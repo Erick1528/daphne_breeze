@@ -7,10 +7,10 @@ use Livewire\Component;
 class ReservationOptions extends Component
 {
     /** Número para WhatsApp y llamadas (sin + ni espacios). Ej: 50412345678 */
-    public string $whatsappNumber = '50412345678';
+    public string $whatsappNumber = '50432181272';
 
     /** Teléfono formateado para mostrar. Ej: +504 1234-5678 */
-    public string $phoneDisplay = '+504 1234-5678';
+    public string $phoneDisplay = '+504 3218-1272';
 
     public string $email = 'info@hoteldaphnebreeze.com';
 
