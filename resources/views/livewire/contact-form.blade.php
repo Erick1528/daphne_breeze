@@ -11,7 +11,7 @@
         </div>
     @else
         <div class="max-w-xl mx-auto rounded-[12px] bg-white/60 border border-caribeCoffee/10 p-6 md:p-8">
-            <form wire:submit="submit" class="space-y-5">
+            <form wire:submit.prevent="submit" class="space-y-5">
                 <div class="grid sm:grid-cols-2 gap-5">
                     <div>
                         <label for="contact-name" class="block text-caribeCoffee/90 font-medium text-sm mb-1.5">Nombre</label>
@@ -54,9 +54,12 @@
                 </div>
 
                 <div class="pt-1 flex justify-center">
-                    <button type="submit" class="group inline-flex items-center gap-1.5 text-caribeOrange font-medium text-sm md:text-base hover:text-caribeCoffee transition-colors duration-200 border-b border-transparent group-hover:border-caribeOrange/50">
-                        Enviar mensaje
-                        <svg class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6L16 12l-6 6"/></svg>
+                    <button type="submit" wire:loading.attr="disabled" wire:target="submit"
+                        class="group inline-flex items-center gap-1.5 text-caribeOrange font-medium text-sm md:text-base hover:text-caribeCoffee transition-colors duration-200 border-b border-transparent group-hover:border-caribeOrange/50 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <span wire:loading.remove wire:target="submit">Enviar mensaje</span>
+                        <span wire:loading wire:target="submit">Enviando...</span>
+                        <svg wire:loading.remove wire:target="submit" class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6L16 12l-6 6"/></svg>
+                        <svg wire:loading wire:target="submit" class="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
                     </button>
                 </div>
             </form>

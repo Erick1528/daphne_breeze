@@ -2,6 +2,9 @@
 
 namespace App\Livewire;
 
+use App\Mail\ContactMail;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
 class ContactForm extends Component
@@ -49,11 +52,33 @@ class ContactForm extends Component
 
     public function submit(): void
     {
+        Log::info('ContactForm: submit() llamado', [
+            'name' => $this->name,
+            'email' => $this->email,
+            'subject' => $this->subject,
+        ]);
+
         $this->validate();
 
-        // TODO: enviar email (Mail::to(...)->send(...))
-        $this->sent = true;
-        $this->reset(['name', 'email', 'subject', 'message']);
+        try {
+            Log::info('ContactForm: Intentando enviar email a info@hoteldaphnebreeze.com');
+            
+            Mail::to('info@hoteldaphnebreeze.com')
+                ->send(new ContactMail($this->name, $this->email, $this->subject, $this->message));
+
+            Log::info('ContactForm: Email enviado correctamente');
+            
+            $this->sent = true;
+            $this->reset(['name', 'email', 'subject', 'message']);
+        } catch (\Exception $e) {
+            Log::error('ContactForm: Error al enviar email', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+            ]);
+            
+            $this->sent = true;
+            $this->reset(['name', 'email', 'subject', 'message']);
+        }
     }
 
     public function render()
