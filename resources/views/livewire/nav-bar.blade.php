@@ -1,3 +1,7 @@
+@php
+    $isHome = url()->current() === route('home');
+    $anchor = fn ($hash) => $isHome ? '#' . $hash : route('home') . '#' . $hash;
+@endphp
 <div class="relative flex justify-between items-center py-[13px] px-5 lg:px-[49px] bg-white rounded-[20px] mb-[22px]"
     x-data="{ open: false }"
     @keydown.escape.window="open = false">
@@ -9,16 +13,16 @@
     {{-- Desktop: nav + contacto --}}
     <nav class="hidden lg:block">
         <ul class="flex uppercase text-caribeCoffee gap-x-5 font-bold text-base leading-5">
-            <li><a href="" class="hover:text-caribeOrange transition-colors">Inicio</a></li>
-            <li><a href="" class="hover:text-caribeOrange transition-colors">Habitaciones</a></li>
-            <li><a href="" class="hover:text-caribeOrange transition-colors">Ofertas</a></li>
-            <li><a href="" class="hover:text-caribeOrange transition-colors">Bar</a></li>
-            <li><a href="" class="hover:text-caribeOrange transition-colors">Galería</a></li>
+            <li><a href="/" class="hover:text-caribeOrange transition-colors">Inicio</a></li>
+            <li><a href="{{ $anchor('habitaciones') }}" class="hover:text-caribeOrange transition-colors">Habitaciones</a></li>
+            <li><a href="{{ $anchor('ofertas') }}" class="hover:text-caribeOrange transition-colors">Ofertas</a></li>
+            <li><a href="{{ $anchor('restaurante') }}" class="hover:text-caribeOrange transition-colors">Restaurante</a></li>
+            {{-- <li><a href="" class="hover:text-caribeOrange transition-colors">Galería</a></li> --}}
         </ul>
     </nav>
 
     <div class="hidden lg:block uppercase text-caribeCoffee font-bold text-base leading-5">
-        <a href="" class="hover:text-caribeOrange transition-colors">Contacto</a>
+        <a href="{{ $anchor('contacto') }}" class="hover:text-caribeOrange transition-colors">Contacto</a>
     </div>
 
     {{-- Mobile: botón menú --}}
@@ -50,13 +54,13 @@
         style="display: none;">
         <nav class="bg-white rounded-[20px] shadow-lg border border-gray-100 py-4 px-4">
             <ul class="flex flex-col uppercase text-caribeCoffee font-bold text-base leading-5 gap-0">
-                <li><a href="" class="block py-3 px-2 hover:bg-bgGray hover:text-caribeOrange rounded-[12px] transition-colors" @click="open = false">Inicio</a></li>
-                <li><a href="" class="block py-3 px-2 hover:bg-bgGray hover:text-caribeOrange rounded-[12px] transition-colors" @click="open = false">Habitaciones</a></li>
-                <li><a href="" class="block py-3 px-2 hover:bg-bgGray hover:text-caribeOrange rounded-[12px] transition-colors" @click="open = false">Ofertas</a></li>
-                <li><a href="" class="block py-3 px-2 hover:bg-bgGray hover:text-caribeOrange rounded-[12px] transition-colors" @click="open = false">Bar</a></li>
-                <li><a href="" class="block py-3 px-2 hover:bg-bgGray hover:text-caribeOrange rounded-[12px] transition-colors" @click="open = false">Galería</a></li>
+                <li><a href="/" class="block py-3 px-2 hover:bg-bgGray hover:text-caribeOrange rounded-[12px] transition-colors" @click="open = false">Inicio</a></li>
+                <li><a href="{{ $anchor('habitaciones') }}" class="block py-3 px-2 hover:bg-bgGray hover:text-caribeOrange rounded-[12px] transition-colors" @click="open = false">Habitaciones</a></li>
+                <li><a href="{{ $anchor('ofertas') }}" class="block py-3 px-2 hover:bg-bgGray hover:text-caribeOrange rounded-[12px] transition-colors" @click="open = false">Ofertas</a></li>
+                <li><a href="{{ $anchor('restaurante') }}" class="block py-3 px-2 hover:bg-bgGray hover:text-caribeOrange rounded-[12px] transition-colors" @click="open = false">Restaurante</a></li>
+                {{-- <li><a href="" class="block py-3 px-2 hover:bg-bgGray hover:text-caribeOrange rounded-[12px] transition-colors" @click="open = false">Galería</a></li> --}}
                 <li class="border-t border-gray-100 mt-2 pt-2">
-                    <a href="" class="block py-3 px-2 hover:bg-bgGray hover:text-caribeOrange rounded-[12px] transition-colors" @click="open = false">Contacto</a>
+                    <a href="{{ $anchor('contacto') }}" class="block py-3 px-2 hover:bg-bgGray hover:text-caribeOrange rounded-[12px] transition-colors" @click="open = false">Contacto</a>
                 </li>
             </ul>
         </nav>
