@@ -17,4 +17,10 @@
             title="Ubicación de Hotel Daphne Breeze en Google Maps">
         </iframe>
     </div>
+
+    <div class="mt-4 text-center">
+        <p class="text-caribeCoffee/90 text-sm md:text-base">
+            Barrio la playa, una cuadra antes del muelle artesanal de omoa, a la par de la marina mercante, 21000 Omoa, Cortés, Honduras
+        </p>
+    </div>
 </section>
