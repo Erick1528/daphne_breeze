@@ -23,7 +23,7 @@
 
         {{-- Título y descuento debajo de la imagen (todos los tamaños) --}}
         <div class="mb-6 mt-4">
-            <h1 class="text-caribeCoffee text-2xl md:text-3xl font-semibold mb-2">{{ $offer->title }}</h1>
+            <h1 class="text-navDark text-2xl md:text-3xl font-semibold mb-2">{{ $offer->title }}</h1>
             @if($offer->discount_percent)
                 <p class="text-caribeOrange font-semibold">{{ $offer->discount_percent }}% descuento</p>
             @endif
