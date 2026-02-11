@@ -49,5 +49,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
             'update' => 'offers.update',
             'destroy' => 'offers.destroy',
         ]);
+
+        Route::get('reviews/create', [App\Http\Controllers\Admin\ReviewController::class, 'create'])->name('reviews.create');
+        Route::get('reviews/{review}/edit', [App\Http\Controllers\Admin\ReviewController::class, 'edit'])->name('reviews.edit');
+        Route::resource('reviews', App\Http\Controllers\Admin\ReviewController::class)->only(['index', 'store', 'update', 'destroy'])->names([
+            'index' => 'reviews.index',
+            'store' => 'reviews.store',
+            'update' => 'reviews.update',
+            'destroy' => 'reviews.destroy',
+        ]);
     });
 });

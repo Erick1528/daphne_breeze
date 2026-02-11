@@ -10,6 +10,7 @@
     <livewire:rooms />
     <livewire:restaurant />
     <livewire:offers />
+    <livewire:reviews />
     <livewire:map-location />
     <livewire:reservation-options />
     <livewire:contact-form />
