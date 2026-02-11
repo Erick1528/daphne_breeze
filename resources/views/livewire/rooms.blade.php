@@ -10,9 +10,26 @@
             if (scrollWidth <= 0) { this.current = 0; return; }
             const index = Math.round((scrollLeft / scrollWidth) * (this.total - 1));
             this.current = Math.max(0, Math.min(index, this.total - 1));
-        }
+        },
     }"
-    x-init="$nextTick(() => { $refs.carousel?.addEventListener('scroll', () => updateCurrent()); updateCurrent(); })">
+    x-init="$nextTick(() => {
+        const el = $refs.carousel;
+        el?.addEventListener('scroll', () => updateCurrent());
+        updateCurrent();
+        const total = {{ count($rooms) }};
+        if (total > 1) {
+            setInterval(() => {
+                const carousel = $refs.carousel;
+                if (!carousel) return;
+                const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+                if (maxScroll <= 0) return;
+                const currentIndex = Math.round((carousel.scrollLeft / maxScroll) * (total - 1));
+                const nextIndex = (currentIndex + 1) % total;
+                const left = nextIndex === 0 ? 0 : maxScroll * (nextIndex / (total - 1));
+                carousel.scrollTo({ left, behavior: 'smooth' });
+            }, 5000);
+        }
+    })">
     <h2 class="text-caribeCoffee text-2xl md:text-3xl font-bold mb-8">Nuestras Habitaciones</h2>
 
     <div class="relative">
