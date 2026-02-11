@@ -11,12 +11,18 @@
 
     --font-montserrat: 'Montserrat', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
 
-    --color-bgGray: #D5D5D5;
-    --color-caribeCoffee: #4A311E;
+    --color-bgGray: #faf8f3;
+    --color-caribeCoffee: #2d5c65;
+    --color-caribeOrange: #c8a35f;
+    --color-navDark: #132f4a;
     --color-white: #FFFFFF;
     --color-black: #000000;
-    --color-caribeOrange: #D08E36;
+    --font-playfair: 'Playfair', Georgia, serif;
 
+}
+
+.font-playfair {
+    font-family: var(--font-playfair);
 }
 
 [x-cloak] {

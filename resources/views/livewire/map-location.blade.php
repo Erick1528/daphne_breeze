@@ -1,7 +1,7 @@
 <section class="mt-[80px] sm:mt-[120px] w-full max-w-7xl mx-auto px-0 sm:px-6" aria-labelledby="map-heading">
     <div class="mb-6 md:mb-8">
-        <h2 id="map-heading" class="text-caribeCoffee text-2xl md:text-3xl font-bold">Ubicación</h2>
-        <p class="mt-1 text-caribeCoffee/70 italic text-sm md:text-base">Encuéntranos en Omoa</p>
+        <h2 id="map-heading" class="text-navDark text-2xl md:text-3xl font-bold">Ubicación</h2>
+        <p class="mt-1 text-navDark/70 italic text-sm md:text-base">Encuéntranos en Omoa</p>
     </div>
 
     <div class="rounded-[12px] overflow-hidden border border-caribeCoffee/10 bg-bgGray/30 aspect-video w-full">

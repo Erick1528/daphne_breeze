@@ -30,7 +30,7 @@
             }, 5000);
         }
     })">
-    <h2 class="text-caribeCoffee text-2xl md:text-3xl font-bold mb-8">Nuestras Habitaciones</h2>
+    <h2 class="text-navDark text-2xl md:text-3xl font-bold mb-8">Nuestras Habitaciones</h2>
 
     <div class="relative">
         {{-- Carrusel: contenedor con scroll horizontal --}}

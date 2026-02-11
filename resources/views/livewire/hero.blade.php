@@ -31,7 +31,7 @@
         <div class="d bg-transparent rounded-tr-[20px] relative">
             <!-- Borde curvo inverso esquina inferior derecha -->
             <div class="absolute bottom-0 right-0 w-[20px] h-[20px] z-10"
-                style="background: radial-gradient(circle at top left, transparent 20px, #D5D5D5 20px);"></div>
+                style="background: radial-gradient(circle at top left, transparent 20px, #faf8f3 20px);"></div>
         </div>
 
         <div class="e bg-transparent rounded-bl-[20px]"></div>
@@ -39,13 +39,13 @@
         <div class="f bg-transparent relative">
             <!-- Borde curvo inverso esquina inferior derecha -->
             <div class="absolute bottom-0 right-0 w-[20px] h-[20px] z-10"
-                style="background: radial-gradient(circle at top left, transparent 20px, #D5D5D5 20px);"></div>
+                style="background: radial-gradient(circle at top left, transparent 20px, #faf8f3 20px);"></div>
         </div>
 
         <div class="g flex items-center justify-center bg-bgGray rounded-tl-[20px] relative z-30">
             <!-- Borde curvo inverso esquina superior derecha -->
             <div class="absolute top-0 right-0 w-[20px] h-[20px] z-10"
-                style="background: radial-gradient(circle at bottom left, transparent 20px, #D5D5D5 20px);"></div>
+                style="background: radial-gradient(circle at bottom left, transparent 20px, #faf8f3 20px);"></div>
 
             <a href="#habitaciones" class="w-full h-full rounded-[12px] pt-[21px] pl-[19px] relative block">
                 @if($heroRoom)
@@ -74,7 +74,7 @@
         <div class="h flex items-center justify-center bg-bgGray rounded-br-[20px] relative z-30">
             <!-- Borde curvo inverso esquina superior izquierda -->
             <div class="absolute top-0 left-0 w-[20px] h-[20px] z-10"
-                style="background: radial-gradient(circle at bottom right, transparent 20px, #D5D5D5 20px);"></div>
+                style="background: radial-gradient(circle at bottom right, transparent 20px, #faf8f3 20px);"></div>
 
             <a href="#ofertas" class="w-full h-full rounded-[12px] pt-[21px] pl-[19px] relative block">
                 @if($heroOffer)

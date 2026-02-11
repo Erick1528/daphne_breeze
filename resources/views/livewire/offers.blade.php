@@ -1,7 +1,7 @@
 <section id="ofertas" class="mt-[80px] sm:mt-[120px] w-full max-w-7xl mx-auto px-0 sm:px-6 scroll-mt-[100px]">
     <div class="mb-8 md:mb-10">
-        <h2 class="text-caribeCoffee text-2xl md:text-3xl font-bold">Ofertas</h2>
-        <p class="mt-1 text-caribeCoffee/70 italic text-sm md:text-base">Promociones especiales para tu estancia</p>
+        <h2 class="text-navDark text-2xl md:text-3xl font-bold">Ofertas</h2>
+        <p class="mt-1 text-navDark/70 italic text-sm md:text-base">Promociones especiales para tu estancia</p>
     </div>
 
     <div class="space-y-12 md:space-y-16">

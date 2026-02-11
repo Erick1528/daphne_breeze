@@ -14,20 +14,20 @@
 </head>
 <body class="bg-bgGray font-montserrat p-5 min-h-screen">
     <header>
-        <nav class="relative flex justify-between items-center py-[13px] px-5 lg:px-[49px] bg-white rounded-[20px] mb-[22px]">
+        <nav class="relative flex justify-between items-center py-[13px] px-5 lg:px-[49px] bg-navDark rounded-[20px] mb-[22px]">
             <div class="flex items-center gap-4">
                 <a href="{{ route('home') }}" class="shrink-0">
                     <img src="{{ asset('build/assets/logo.svg') }}" alt="Daphne Breeze" class="h-12 lg:h-[74px]">
                 </a>
-                <span class="text-caribeCoffee/50 hidden md:block">|</span>
-                <span class="text-caribeCoffee/70 text-sm font-medium hidden md:block">Panel de Administración</span>
+                <span class="text-caribeOrange/50 hidden md:block">|</span>
+                <span class="text-[#faf8f3] text-sm font-medium hidden md:block">Panel de Administración</span>
             </div>
             <div class="flex items-center gap-4">
                 @auth
-                    <span class="text-caribeCoffee/70 text-xs md:text-sm hidden sm:block">{{ Auth::user()->email }}</span>
+                    <span class="text-[#faf8f3]/80 text-xs md:text-sm hidden sm:block">{{ Auth::user()->email }}</span>
                     <form method="POST" action="{{ route('admin.logout') }}">
                         @csrf
-                        <button type="submit" class="text-caribeOrange hover:text-caribeCoffee text-xs md:text-sm font-medium transition-colors">
+                        <button type="submit" class="text-caribeOrange hover:text-[#faf8f3] text-xs md:text-sm font-medium transition-colors">
                             Cerrar sesión
                         </button>
                     </form>

@@ -31,8 +31,8 @@
         }
     })">
     <div class="mb-8 md:mb-10">
-        <h2 class="text-caribeCoffee text-2xl md:text-3xl font-bold">Lo que dicen nuestros huéspedes</h2>
-        <p class="mt-1 text-caribeCoffee/70 italic text-sm md:text-base">Reseñas de quienes nos han visitado</p>
+        <h2 class="text-navDark text-2xl md:text-3xl font-bold">Lo que dicen nuestros huéspedes</h2>
+        <p class="mt-1 text-navDark/70 italic text-sm md:text-base">Reseñas de quienes nos han visitado</p>
     </div>
 
     @if ($reviews->isEmpty())

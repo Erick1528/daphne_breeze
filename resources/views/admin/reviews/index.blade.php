@@ -6,8 +6,8 @@
     <div class="mt-[80px] sm:mt-[120px]">
         <div class="mb-8 md:mb-10 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
             <div>
-                <h1 class="text-caribeCoffee text-2xl md:text-3xl font-bold">Reseñas</h1>
-                <p class="mt-1 text-caribeCoffee/70 italic text-sm md:text-base">Gestionar reseñas para mostrar en la web (manual o copiadas de Google)</p>
+                <h1 class="text-navDark text-2xl md:text-3xl font-bold">Reseñas</h1>
+                <p class="mt-1 text-navDark/70 italic text-sm md:text-base">Gestionar reseñas para mostrar en la web (manual o copiadas de Google)</p>
             </div>
             <a href="{{ route('admin.reviews.create') }}" class="group inline-flex items-center justify-center gap-2 bg-caribeOrange text-white font-medium px-5 py-2.5 rounded-[12px] hover:opacity-90 transition-all shadow-sm hover:shadow-md text-sm md:text-base w-fit">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>

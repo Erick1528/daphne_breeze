@@ -23,7 +23,7 @@
 
         {{-- Título y datos debajo de la imagen (todos los tamaños) --}}
         <div class="mb-6 mt-4">
-            <h1 class="text-caribeCoffee text-2xl md:text-3xl font-semibold mb-2">{{ $room->title }}</h1>
+            <h1 class="text-navDark text-2xl md:text-3xl font-semibold mb-2">{{ $room->title }}</h1>
             <p class="text-caribeCoffee/80 italic text-sm md:text-base">
                 {{ $room->persons }} {{ $room->persons === 1 ? 'persona' : 'personas' }} · {{ $room->beds_label }}
             </p>

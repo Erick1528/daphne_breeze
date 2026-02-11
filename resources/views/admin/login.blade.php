@@ -13,8 +13,8 @@
     <div class="w-full max-w-md">
         <div class="bg-white/60 border border-caribeCoffee/10 rounded-[12px] p-8 shadow-lg">
             <div class="text-center mb-8">
-                <h1 class="text-caribeCoffee text-2xl md:text-3xl font-bold mb-2">Admin</h1>
-                <p class="text-caribeCoffee/70 text-sm">Inicia sesión para continuar</p>
+                <h1 class="text-navDark text-2xl md:text-3xl font-bold mb-2">Admin</h1>
+                <p class="text-navDark/70 text-sm">Inicia sesión para continuar</p>
             </div>
 
             @if ($errors->any())
