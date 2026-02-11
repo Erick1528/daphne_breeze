@@ -1,4 +1,4 @@
-<section id="reseñas" class="mt-[80px] sm:mt-[120px] w-full max-w-7xl mx-auto px-0 sm:px-6 scroll-mt-[100px]"
+<section id="reseñas" class="mt-[60px] sm:mt-[120px] w-full max-w-7xl mx-auto px-3 sm:px-6 scroll-mt-[100px]"
     x-data="{
         current: 0,
         total: {{ $reviews->count() }},
@@ -30,34 +30,34 @@
             }, 5000);
         }
     })">
-    <div class="mb-8 md:mb-10">
-        <h2 class="text-navDark text-2xl md:text-3xl font-bold">Lo que dicen nuestros huéspedes</h2>
-        <p class="mt-1 text-navDark/70 italic text-sm md:text-base">Reseñas de quienes nos han visitado</p>
+    <div class="mb-6 sm:mb-8 md:mb-10">
+        <h2 class="text-navDark text-xl sm:text-2xl md:text-3xl font-bold">Lo que dicen nuestros huéspedes</h2>
+        <p class="mt-1 text-navDark/70 italic text-xs sm:text-sm md:text-base">Reseñas de quienes nos han visitado</p>
     </div>
 
     @if ($reviews->isEmpty())
-        <div class="rounded-[12px] border border-caribeCoffee/10 bg-white/60 p-8 md:p-12 text-center">
-            <p class="text-caribeCoffee/70 text-base mb-6">Próximamente podrás leer aquí las reseñas de nuestros huéspedes.</p>
-            <a href="https://maps.app.goo.gl/V5eBZf79WkEWj7Uk9" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center gap-2 text-caribeOrange font-medium text-sm md:text-base hover:text-caribeCoffee transition-colors">
+        <div class="rounded-[12px] border border-caribeCoffee/10 bg-white/60 p-5 sm:p-8 md:p-12 text-center">
+            <p class="text-caribeCoffee/70 text-sm sm:text-base mb-5 sm:mb-6">Próximamente podrás leer aquí las reseñas de nuestros huéspedes.</p>
+            <a href="https://maps.app.goo.gl/V5eBZf79WkEWj7Uk9" target="_blank" rel="noopener noreferrer" class="group inline-flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-caribeOrange font-medium text-sm md:text-base hover:text-caribeCoffee transition-colors">
                 <span class="border-b border-transparent group-hover:border-caribeCoffee">Deja tu reseña en Google</span>
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6L16 12l-6 6"/></svg>
+                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6L16 12l-6 6"/></svg>
             </a>
         </div>
     @else
         <div class="relative">
-            <div class="overflow-x-auto snap-x snap-mandatory scroll-smooth flex gap-4 pb-4 -mx-1 md:mx-0 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+            <div class="overflow-x-auto snap-x snap-mandatory scroll-smooth flex gap-3 sm:gap-4 pb-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
                 x-ref="carousel">
                 @foreach ($reviews as $review)
-                    <article class="flex-shrink-0 w-full min-w-full snap-center rounded-[12px] border border-caribeCoffee/10 bg-white/60 p-6 md:p-8 lg:p-10">
-                        <div class="flex items-center gap-0.5 text-caribeOrange mb-4" aria-label="{{ $review->rating }} de 5 estrellas">
+                    <article class="flex-shrink-0 w-full min-w-full snap-center rounded-[12px] border border-caribeCoffee/10 bg-white/60 p-4 sm:p-6 md:p-8 lg:p-10">
+                        <div class="flex items-center gap-0.5 text-caribeOrange mb-3 sm:mb-4" aria-label="{{ $review->rating }} de 5 estrellas">
                             @for ($star = 1; $star <= 5; $star++)
-                                <svg class="w-5 h-5 {{ $star <= $review->rating ? 'text-caribeOrange' : 'text-caribeCoffee/20' }}" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5 {{ $star <= $review->rating ? 'text-caribeOrange' : 'text-caribeCoffee/20' }}" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
                             @endfor
                         </div>
-                        <p class="text-caribeCoffee/90 text-base md:text-lg leading-relaxed">{{ $review->content }}</p>
-                        <p class="mt-4 font-semibold text-caribeCoffee">{{ $review->author_name }}</p>
+                        <p class="text-caribeCoffee/90 text-sm sm:text-base md:text-lg leading-relaxed">{{ $review->content }}</p>
+                        <p class="mt-3 sm:mt-4 font-semibold text-caribeCoffee text-sm sm:text-base">{{ $review->author_name }}</p>
                         @if ($review->review_date)
-                            <p class="text-sm text-caribeCoffee/60 mt-0.5">{{ $review->review_date->translatedFormat('d \d\e F \d\e Y') }}</p>
+                            <p class="text-xs sm:text-sm text-caribeCoffee/60 mt-0.5">{{ $review->review_date->translatedFormat('d \d\e F \d\e Y') }}</p>
                         @endif
                     </article>
                 @endforeach
@@ -77,7 +77,7 @@
             </button>
         </div>
 
-        <div class="flex justify-center gap-2 mt-6">
+        <div class="flex justify-center gap-2 mt-4 sm:mt-6">
             @foreach ($reviews as $index => $review)
                 <button type="button"
                     class="w-2 h-2 rounded-full transition-all duration-200"
@@ -88,11 +88,11 @@
             @endforeach
         </div>
 
-        <div class="mt-8 text-center">
-            <a href="https://maps.app.goo.gl/V5eBZf79WkEWj7Uk9" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center gap-2 text-caribeCoffee text-sm md:text-base hover:text-caribeOrange transition-colors">
+        <div class="mt-6 sm:mt-8 text-center px-2">
+            <a href="https://maps.app.goo.gl/V5eBZf79WkEWj7Uk9" target="_blank" rel="noopener noreferrer" class="group inline-flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-caribeCoffee text-xs sm:text-sm md:text-base hover:text-caribeOrange transition-colors">
                 <span>¿Estuviste con nosotros?</span>
                 <span class="font-medium border-b border-transparent group-hover:border-caribeOrange">Deja tu reseña en Google</span>
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6L16 12l-6 6"/></svg>
+                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6L16 12l-6 6"/></svg>
             </a>
         </div>
     @endif
