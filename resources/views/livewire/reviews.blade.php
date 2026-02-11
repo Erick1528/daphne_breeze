@@ -37,7 +37,11 @@
 
     @if ($reviews->isEmpty())
         <div class="rounded-[12px] border border-caribeCoffee/10 bg-white/60 p-8 md:p-12 text-center">
-            <p class="text-caribeCoffee/70 text-base">Próximamente podrás leer aquí las reseñas de nuestros huéspedes.</p>
+            <p class="text-caribeCoffee/70 text-base mb-6">Próximamente podrás leer aquí las reseñas de nuestros huéspedes.</p>
+            <a href="https://maps.app.goo.gl/V5eBZf79WkEWj7Uk9" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center gap-2 text-caribeOrange font-medium text-sm md:text-base hover:text-caribeCoffee transition-colors">
+                <span class="border-b border-transparent group-hover:border-caribeCoffee">Deja tu reseña en Google</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6L16 12l-6 6"/></svg>
+            </a>
         </div>
     @else
         <div class="relative">
@@ -82,6 +86,14 @@
                     @click="const el = $refs.carousel; const maxScroll = el.scrollWidth - el.clientWidth; const total = {{ $reviews->count() }}; const left = total <= 1 ? 0 : maxScroll * ({{ $index }} / (total - 1)); el.scrollTo({ left, behavior: 'smooth' });">
                 </button>
             @endforeach
+        </div>
+
+        <div class="mt-8 text-center">
+            <a href="https://maps.app.goo.gl/V5eBZf79WkEWj7Uk9" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center gap-2 text-caribeCoffee text-sm md:text-base hover:text-caribeOrange transition-colors">
+                <span>¿Estuviste con nosotros?</span>
+                <span class="font-medium border-b border-transparent group-hover:border-caribeOrange">Deja tu reseña en Google</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6L16 12l-6 6"/></svg>
+            </a>
         </div>
     @endif
 </section>
