@@ -5,8 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#132f4a">
     <link rel="icon" href="{{ asset('build/assets/logo.webp') }}">
     <title>Daphne Breeze - @yield('title')</title>
+
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ request()->url() }}">
+    <meta name="description" content="@yield('meta_description', 'Hotel Daphne Breeze en Omoa, Cortés, Honduras. Barrio La Playa, junto al muelle artesanal y la marina. Habitaciones, restaurante y bar, ofertas y reservas.')">
+
+    @stack('meta')
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
