@@ -143,10 +143,7 @@ class RoomController extends Controller
                 true
             );
 
-            // Eliminar imagen anterior
-            if ($room->image && Storage::disk('public')->exists(str_replace('storage/', '', $room->image))) {
-                Storage::disk('public')->delete(str_replace('storage/', '', $room->image));
-            }
+            $this->deleteRoomImageAndOg($room->image);
 
             $imagePath = $this->processAndStoreImage($uploadedFile, 'rooms');
 
@@ -161,10 +158,7 @@ class RoomController extends Controller
             
             // Si se subió una nueva imagen, procesarla y eliminar la anterior
             if ($request->hasFile('image')) {
-                // Eliminar imagen anterior
-                if ($room->image && Storage::disk('public')->exists(str_replace('storage/', '', $room->image))) {
-                    Storage::disk('public')->delete(str_replace('storage/', '', $room->image));
-                }
+                $this->deleteRoomImageAndOg($room->image);
                 $imagePath = $this->processAndStoreImage($request->file('image'), 'rooms');
                 $validated['image'] = $imagePath;
             } else {
@@ -181,10 +175,7 @@ class RoomController extends Controller
 
     public function destroy(Room $room)
     {
-        // Eliminar imagen
-        if ($room->image && Storage::disk('public')->exists($room->image)) {
-            Storage::disk('public')->delete($room->image);
-        }
+        $this->deleteRoomImageAndOg($room->image);
 
         $room->delete();
 
@@ -193,15 +184,18 @@ class RoomController extends Controller
     }
 
     /**
-     * Procesa la imagen: convierte a WebP y comprime a máximo 200KB
+     * Procesa la imagen: convierte a WebP y comprime a máximo 200KB.
+     * Además genera una versión JPG en {folder}/og/ para Open Graph (Facebook, etc.).
      */
     private function processAndStoreImage($file, $folder = 'rooms')
     {
-        $filename = Str::uuid() . '.webp';
+        $uuid = Str::uuid();
+        $filename = $uuid . '.webp';
         $path = $folder . '/' . $filename;
 
-        // Crear directorio si no existe
+        // Crear directorios si no existen
         Storage::disk('public')->makeDirectory($folder);
+        Storage::disk('public')->makeDirectory($folder . '/og');
 
         // Obtener información de la imagen
         $imageInfo = getimagesize($file->getRealPath());
@@ -265,8 +259,15 @@ class RoomController extends Controller
             }
         }
 
-        // Guardar en storage
+        // Guardar WebP en storage
         Storage::disk('public')->put($path, file_get_contents($tempFile));
+
+        // Generar JPG para Open Graph (Facebook no soporta WebP al 100%)
+        $ogPath = $folder . '/og/' . $uuid . '.jpg';
+        $tempJpg = tempnam(sys_get_temp_dir(), 'og_');
+        imagejpeg($resizedImage, $tempJpg, 88);
+        Storage::disk('public')->put($ogPath, file_get_contents($tempJpg));
+        unlink($tempJpg);
 
         // Limpiar recursos
         imagedestroy($sourceImage);
@@ -274,5 +275,35 @@ class RoomController extends Controller
         unlink($tempFile);
 
         return 'storage/' . $path;
+    }
+
+    /**
+     * Ruta de la imagen OG (JPG) a partir de la ruta de la imagen principal.
+     */
+    private function getOgImagePath(string $imagePath): string
+    {
+        $relative = str_replace('storage/', '', $imagePath);
+        $baseName = pathinfo($relative, PATHINFO_FILENAME);
+        $folder = pathinfo($relative, PATHINFO_DIRNAME);
+
+        return 'storage/' . $folder . '/og/' . $baseName . '.jpg';
+    }
+
+    /**
+     * Elimina la imagen principal y su versión OG si existe.
+     */
+    private function deleteRoomImageAndOg(?string $imagePath): void
+    {
+        if (! $imagePath) {
+            return;
+        }
+        $relative = str_replace('storage/', '', $imagePath);
+        if (Storage::disk('public')->exists($relative)) {
+            Storage::disk('public')->delete($relative);
+        }
+        $ogPath = str_replace('storage/', '', $this->getOgImagePath($imagePath));
+        if (Storage::disk('public')->exists($ogPath)) {
+            Storage::disk('public')->delete($ogPath);
+        }
     }
 }
