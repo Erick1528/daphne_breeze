@@ -100,9 +100,7 @@ class OfferController extends Controller
         $validated['discount_percent'] = $validated['discount_percent'] ?? null;
 
         if ($request->hasFile('image')) {
-            if ($offer->image && Storage::disk('public')->exists(str_replace('storage/', '', $offer->image))) {
-                Storage::disk('public')->delete(str_replace('storage/', '', $offer->image));
-            }
+            $this->deleteOfferImageAndOg($offer->image);
             $validated['image'] = $this->processAndStoreImage($request->file('image'), 'offers');
         } else {
             unset($validated['image']);
@@ -116,9 +114,8 @@ class OfferController extends Controller
 
     public function destroy(Offer $offer)
     {
-        if ($offer->image && Storage::disk('public')->exists(str_replace('storage/', '', $offer->image))) {
-            Storage::disk('public')->delete(str_replace('storage/', '', $offer->image));
-        }
+        $this->deleteOfferImageAndOg($offer->image);
+
         $offer->delete();
 
         return redirect()->route('admin.offers.index')
@@ -127,10 +124,13 @@ class OfferController extends Controller
 
     private function processAndStoreImage($file, string $folder = 'offers'): string
     {
-        $filename = Str::uuid() . '.webp';
+        $uuid = Str::uuid();
+        $filename = $uuid . '.webp';
         $path = $folder . '/' . $filename;
 
+        // Crear directorios si no existen
         Storage::disk('public')->makeDirectory($folder);
+        Storage::disk('public')->makeDirectory($folder . '/og');
 
         $imageInfo = getimagesize($file->getRealPath());
         $mimeType = $imageInfo['mime'];
@@ -186,12 +186,50 @@ class OfferController extends Controller
             }
         }
 
+        // Guardar WebP en storage
         Storage::disk('public')->put($path, file_get_contents($tempFile));
+
+        // Generar JPG para Open Graph (Facebook no soporta WebP al 100%)
+        $ogPath = $folder . '/og/' . $uuid . '.jpg';
+        $tempJpg = tempnam(sys_get_temp_dir(), 'og_');
+        imagejpeg($resizedImage, $tempJpg, 88);
+        Storage::disk('public')->put($ogPath, file_get_contents($tempJpg));
+        unlink($tempJpg);
 
         imagedestroy($sourceImage);
         imagedestroy($resizedImage);
         unlink($tempFile);
 
         return 'storage/' . $path;
+    }
+
+    /**
+     * Ruta de la imagen OG (JPG) a partir de la ruta de la imagen principal.
+     */
+    private function getOgImagePath(string $imagePath): string
+    {
+        $relative = str_replace('storage/', '', $imagePath);
+        $baseName = pathinfo($relative, PATHINFO_FILENAME);
+        $folder = pathinfo($relative, PATHINFO_DIRNAME);
+
+        return 'storage/' . $folder . '/og/' . $baseName . '.jpg';
+    }
+
+    /**
+     * Elimina la imagen principal y su versión OG si existe.
+     */
+    private function deleteOfferImageAndOg(?string $imagePath): void
+    {
+        if (! $imagePath) {
+            return;
+        }
+        $relative = str_replace('storage/', '', $imagePath);
+        if (Storage::disk('public')->exists($relative)) {
+            Storage::disk('public')->delete($relative);
+        }
+        $ogPath = str_replace('storage/', '', $this->getOgImagePath($imagePath));
+        if (Storage::disk('public')->exists($ogPath)) {
+            Storage::disk('public')->delete($ogPath);
+        }
     }
 }
