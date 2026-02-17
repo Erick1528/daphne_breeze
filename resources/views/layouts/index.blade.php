@@ -9,9 +9,20 @@
     <link rel="icon" href="{{ asset('build/assets/logo.webp') }}">
     <title>Daphne Breeze - @yield('title')</title>
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1X766C1Q5Y"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-1X766C1Q5Y');
+    </script>
+
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="{{ request()->url() }}">
-    <meta name="description" content="@yield('meta_description', 'Hotel Daphne Breeze en Omoa, Cortés, Honduras. Barrio La Playa, junto al muelle artesanal y la marina. Habitaciones, restaurante y bar, ofertas y reservas.')">
+    <meta name="description"
+        content="@yield('meta_description', 'Hotel Daphne Breeze en Omoa, Cortés, Honduras. Barrio La Playa, junto al muelle artesanal y la marina. Habitaciones, restaurante y bar, ofertas y reservas.')">
 
     @stack('meta')
 
@@ -29,7 +40,7 @@
 
     <header class="">
         <livewire:nav-bar>
-        @yield('banner')
+            @yield('banner')
     </header>
 
     <main>
@@ -47,7 +58,7 @@
             anchor.addEventListener('click', function (e) {
                 const href = this.getAttribute('href');
                 if (href === '#') return;
-                
+
                 const target = document.querySelector(href);
                 if (target) {
                     e.preventDefault();
