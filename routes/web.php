@@ -6,6 +6,8 @@ Route::get('/', function () {
     return view('index');
 })->name('home');
 
+Route::view('politica-de-privacidad', 'privacy')->name('privacy');
+
 Route::get('ofertas', function () {
     return view('offers');
 })->name('offers');
@@ -60,3 +62,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         ]);
     });
 });
+
+// Cambiar texto de sección de restaurante y bar 
+// Agregar pdf de carta de restaurante y bar
+// Agregar URLs de Booking.com y AirBnb

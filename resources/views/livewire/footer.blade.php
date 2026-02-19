@@ -15,8 +15,13 @@
             </ul>
         </nav>
 
-        <p class="text-caribeOrange/80 text-xs text-center max-w-md px-4">
-            © {{ date('Y') }} Daphne Breeze. Todos los derechos reservados.
-        </p>
+        <div class="flex flex-col items-center gap-1 text-center text-xs md:text-sm text-caribeOrange/80 px-4">
+            <a href="{{ route('privacy') }}" class="hover:text-[#faf8f3] transition-colors">
+                Política de privacidad
+            </a>
+            <p>
+                © {{ date('Y') }} Daphne Breeze. Todos los derechos reservados.
+            </p>
+        </div>
     </div>
 </footer>
