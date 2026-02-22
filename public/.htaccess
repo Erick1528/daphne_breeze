@@ -1,3 +1,11 @@
+# Imágenes: siempre 200 (evitar 304). Quitar ETag y Last-Modified.
+<IfModule mod_headers.c>
+    <FilesMatch "\.(webp|jpg|jpeg|png|gif|ico|svg)$">
+        Header unset ETag
+        Header unset Last-Modified
+    </FilesMatch>
+</IfModule>
+
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes

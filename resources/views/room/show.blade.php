@@ -10,7 +10,7 @@
     <meta property="og:url" content="{{ request()->url() }}">
     <meta property="og:title" content="{{ $room->title }} - Hotel Daphne Breeze">
     <meta property="og:description" content="{{ Str::limit(strip_tags($room->description ?? $room->title), 200) }}">
-    <meta property="og:image" content="{{ $room->og_image_path ? url(asset($room->og_image_path)) : url(asset('build/assets/logo.webp')) }}">
+    <meta property="og:image" content="{{ ($room->image_jpg ?? $room->image) ? url(asset($room->image_jpg ?? $room->image)) : url(asset('build/assets/logo.webp')) }}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:locale" content="es_ES">
@@ -19,7 +19,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ $room->title }} - Hotel Daphne Breeze">
     <meta name="twitter:description" content="{{ Str::limit(strip_tags($room->description ?? $room->title), 200) }}">
-    <meta name="twitter:image" content="{{ $room->og_image_path ? url(asset($room->og_image_path)) : url(asset('build/assets/logo.webp')) }}">
+    <meta name="twitter:image" content="{{ ($room->image_jpg ?? $room->image) ? url(asset($room->image_jpg ?? $room->image)) : url(asset('build/assets/logo.webp')) }}">
 @endpush
 
 @section('banner')

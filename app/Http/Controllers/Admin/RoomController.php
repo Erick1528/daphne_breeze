@@ -91,9 +91,10 @@ class RoomController extends Controller
                 true
             );
             
-            // Procesar y guardar imagen
-            $imagePath = $this->processAndStoreImage($uploadedFile, 'rooms');
-            $validated['image'] = $imagePath;
+            // Procesar y guardar imagen (WebP + JPG)
+            $paths = $this->processAndStoreImage($uploadedFile, 'rooms');
+            $validated['image'] = $paths['image'];
+            $validated['image_jpg'] = $paths['image_jpg'];
             
             // Eliminar archivo temporal
             Storage::disk('public')->delete($tempPath);
@@ -106,9 +107,10 @@ class RoomController extends Controller
             // Validación normal con imagen requerida
             $validated = $request->validate($rules, $this->messages, $this->validationAttributes());
             
-            // Procesar y guardar imagen
-            $imagePath = $this->processAndStoreImage($request->file('image'), 'rooms');
-            $validated['image'] = $imagePath;
+            // Procesar y guardar imagen (WebP + JPG)
+            $paths = $this->processAndStoreImage($request->file('image'), 'rooms');
+            $validated['image'] = $paths['image'];
+            $validated['image_jpg'] = $paths['image_jpg'];
         }
 
         Room::create($validated);
@@ -143,24 +145,26 @@ class RoomController extends Controller
                 true
             );
 
-            $this->deleteRoomImageAndOg($room->image);
+            $this->deleteRoomImages($room);
 
-            $imagePath = $this->processAndStoreImage($uploadedFile, 'rooms');
+            $paths = $this->processAndStoreImage($uploadedFile, 'rooms');
 
             Storage::disk('public')->delete($tempPath);
             unlink($tempFile);
 
-            // Validar primero; luego añadir la ruta de la imagen para que no se pierda
+            // Validar primero; luego añadir las rutas de la imagen
             $validated = $request->validate($rules, $this->messages, $this->validationAttributes());
-            $validated['image'] = $imagePath;
+            $validated['image'] = $paths['image'];
+            $validated['image_jpg'] = $paths['image_jpg'];
         } else {
             $validated = $request->validate($rules, $this->messages, $this->validationAttributes());
             
             // Si se subió una nueva imagen, procesarla y eliminar la anterior
             if ($request->hasFile('image')) {
-                $this->deleteRoomImageAndOg($room->image);
-                $imagePath = $this->processAndStoreImage($request->file('image'), 'rooms');
-                $validated['image'] = $imagePath;
+                $this->deleteRoomImages($room);
+                $paths = $this->processAndStoreImage($request->file('image'), 'rooms');
+                $validated['image'] = $paths['image'];
+                $validated['image_jpg'] = $paths['image_jpg'];
             } else {
                 // Mantener la imagen existente
                 unset($validated['image']);
@@ -175,7 +179,7 @@ class RoomController extends Controller
 
     public function destroy(Room $room)
     {
-        $this->deleteRoomImageAndOg($room->image);
+        $this->deleteRoomImages($room);
 
         $room->delete();
 
@@ -184,18 +188,16 @@ class RoomController extends Controller
     }
 
     /**
-     * Procesa la imagen: convierte a WebP y comprime a máximo 200KB.
-     * Además genera una versión JPG en {folder}/og/ para Open Graph (Facebook, etc.).
+     * Procesa la imagen: genera WebP (para web) y JPG (para OG) en la misma carpeta.
+     * Devuelve ['image' => ruta webp, 'image_jpg' => ruta jpg].
      */
-    private function processAndStoreImage($file, $folder = 'rooms')
+    private function processAndStoreImage($file, $folder = 'rooms'): array
     {
         $uuid = Str::uuid();
-        $filename = $uuid . '.webp';
-        $path = $folder . '/' . $filename;
+        $pathWebp = $folder . '/' . $uuid . '.webp';
+        $pathJpg = $folder . '/' . $uuid . '.jpg';
 
-        // Crear directorios si no existen
         Storage::disk('public')->makeDirectory($folder);
-        Storage::disk('public')->makeDirectory($folder . '/og');
 
         // Obtener información de la imagen
         $imageInfo = getimagesize($file->getRealPath());
@@ -260,50 +262,37 @@ class RoomController extends Controller
         }
 
         // Guardar WebP en storage
-        Storage::disk('public')->put($path, file_get_contents($tempFile));
+        Storage::disk('public')->put($pathWebp, file_get_contents($tempFile));
 
-        // Generar JPG para Open Graph (Facebook no soporta WebP al 100%)
-        $ogPath = $folder . '/og/' . $uuid . '.jpg';
-        $tempJpg = tempnam(sys_get_temp_dir(), 'og_');
+        // Generar JPG en la misma carpeta (para Open Graph)
+        $tempJpg = tempnam(sys_get_temp_dir(), 'jpg_');
         imagejpeg($resizedImage, $tempJpg, 88);
-        Storage::disk('public')->put($ogPath, file_get_contents($tempJpg));
+        Storage::disk('public')->put($pathJpg, file_get_contents($tempJpg));
         unlink($tempJpg);
 
-        // Limpiar recursos
         imagedestroy($sourceImage);
         imagedestroy($resizedImage);
         unlink($tempFile);
 
-        return 'storage/' . $path;
+        return [
+            'image' => 'storage/' . $pathWebp,
+            'image_jpg' => 'storage/' . $pathJpg,
+        ];
     }
 
     /**
-     * Ruta de la imagen OG (JPG) a partir de la ruta de la imagen principal.
+     * Elimina los archivos de imagen (WebP y JPG) de una habitación.
      */
-    private function getOgImagePath(string $imagePath): string
+    private function deleteRoomImages(Room $room): void
     {
-        $relative = str_replace('storage/', '', $imagePath);
-        $baseName = pathinfo($relative, PATHINFO_FILENAME);
-        $folder = pathinfo($relative, PATHINFO_DIRNAME);
-
-        return 'storage/' . $folder . '/og/' . $baseName . '.jpg';
-    }
-
-    /**
-     * Elimina la imagen principal y su versión OG si existe.
-     */
-    private function deleteRoomImageAndOg(?string $imagePath): void
-    {
-        if (! $imagePath) {
-            return;
-        }
-        $relative = str_replace('storage/', '', $imagePath);
-        if (Storage::disk('public')->exists($relative)) {
-            Storage::disk('public')->delete($relative);
-        }
-        $ogPath = str_replace('storage/', '', $this->getOgImagePath($imagePath));
-        if (Storage::disk('public')->exists($ogPath)) {
-            Storage::disk('public')->delete($ogPath);
+        foreach (['image', 'image_jpg'] as $attr) {
+            $path = $room->{$attr};
+            if ($path) {
+                $relative = str_replace('storage/', '', $path);
+                if (Storage::disk('public')->exists($relative)) {
+                    Storage::disk('public')->delete($relative);
+                }
+            }
         }
     }
 }
