@@ -6,15 +6,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="theme-color" content="#132f4a">
-    <link rel="icon" href="{{ asset('build/assets/logo.webp') }}">
+    <link rel="icon" type="image/webp" href="{{ asset('build/assets/logo.webp') }}">
+    <link rel="icon" type="image/svg+xml" href="{{ asset('build/assets/logo.svg') }}">
+    <link rel="apple-touch-icon" href="{{ asset('build/assets/logo.webp') }}">
     <title>Daphne Breeze - @yield('title')</title>
 
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="@yield('meta_robots', 'index, follow')">
     <link rel="canonical" href="{{ request()->url() }}">
     <meta name="description"
-        content="@yield('meta_description', 'Hotel Daphne Breeze en Omoa, Cortés, Honduras. Barrio La Playa, junto al muelle artesanal y la marina. Habitaciones, restaurante y bar, ofertas y reservas.')">
+        content="@yield('meta_description', 'Hotel Daphne Breeze en Omoa, Cortés, Honduras. Barrio La Playa, a una cuadra del muelle artesanal y junto a la marina. Cerca de la playa y la Fortaleza de San Fernando de Omoa. Piscina, restaurante y bar, billar y juegos para niños. Habitaciones, ofertas y reservas.')">
+    <meta name="keywords"
+        content="@yield('meta_keywords', 'hotel Omoa, hotel Cortés, Honduras, hotel playa Omoa, Fortaleza San Fernando Omoa, hotel con piscina Omoa, restaurante Omoa, alojamiento Omoa, Daphne Breeze, muelle artesanal Omoa, marina Omoa, hotel familia Omoa, billar Omoa, hotel Barrio La Playa')">
 
     @stack('meta')
+
+    {{-- Schema.org JSON-LD: Hotel (para rich results en Google) --}}
+    <script type="application/ld+json">
+    @php
+        $schemaHotel = [
+            '@context' => 'https://schema.org',
+            '@type' => 'Hotel',
+            'name' => 'Hotel Daphne Breeze',
+            'description' => 'Hotel en Omoa, Cortés, Honduras. Barrio La Playa, cerca de la playa y la Fortaleza de San Fernando de Omoa. Piscina, restaurante y bar, billar y juegos para niños.',
+            'url' => url('/'),
+            'image' => url(asset('build/assets/logo.webp')),
+            'telephone' => '+504 3218-1272',
+            'email' => 'info@hoteldaphnebreeze.com',
+            'address' => [
+                '@type' => 'PostalAddress',
+                'streetAddress' => 'Barrio La Playa, una cuadra antes del muelle artesanal de Omoa, a la par de la marina mercante',
+                'addressLocality' => 'Omoa',
+                'addressRegion' => 'Cortés',
+                'postalCode' => '21000',
+                'addressCountry' => 'HN',
+            ],
+            'amenityFeature' => [
+                ['@type' => 'LocationFeatureSpecification', 'name' => 'Piscina', 'value' => true],
+                ['@type' => 'LocationFeatureSpecification', 'name' => 'Restaurante', 'value' => true],
+                ['@type' => 'LocationFeatureSpecification', 'name' => 'Bar', 'value' => true],
+                ['@type' => 'LocationFeatureSpecification', 'name' => 'Billar', 'value' => true],
+                ['@type' => 'LocationFeatureSpecification', 'name' => 'Zona de juegos para niños', 'value' => true],
+            ],
+        ];
+    @endphp
+    {!! json_encode($schemaHotel, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

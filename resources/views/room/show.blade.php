@@ -2,6 +2,7 @@
 
 @section('title', $room->title . ' - Habitaciones')
 @section('meta_description', Str::limit(strip_tags($room->description ?? $room->title), 160))
+@section('meta_keywords', $room->title . ', habitación Omoa, hotel Omoa, alojamiento Omoa, Daphne Breeze, hotel Cortés, hotel con piscina Omoa')
 
 @push('meta')
     <link rel="canonical" href="{{ request()->url() }}">

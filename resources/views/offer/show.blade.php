@@ -2,6 +2,7 @@
 
 @section('title', $offer->title . ' - Ofertas')
 @section('meta_description', Str::limit(strip_tags($offer->description ?? $offer->title), 160))
+@section('meta_keywords', $offer->title . ', ofertas hotel Omoa, promociones Daphne Breeze, descuentos Omoa, ofertas alojamiento Cortés')
 
 @push('meta')
     <link rel="canonical" href="{{ request()->url() }}">

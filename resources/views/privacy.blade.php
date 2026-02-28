@@ -2,6 +2,7 @@
 
 @section('title', 'Política de privacidad')
 @section('meta_description', 'Política de privacidad de Hotel Daphne Breeze en Omoa, Cortés, Honduras. Información sobre el uso de datos y Google Analytics.')
+@section('meta_keywords', 'política de privacidad, Daphne Breeze, hotel Omoa')
 
 @section('banner')
     <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8">

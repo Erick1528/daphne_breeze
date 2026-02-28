@@ -1,7 +1,8 @@
 @extends('layouts.index')
 
 @section('title', 'Ofertas')
-@section('meta_description', 'Ofertas y promociones en Hotel Daphne Breeze, Omoa, Cortés. Descuentos en habitaciones y estancias. Barrio La Playa, junto al muelle artesanal.')
+@section('meta_description', 'Ofertas y promociones en Hotel Daphne Breeze, Omoa, Cortés. Descuentos en habitaciones y estancias. Hotel con piscina, restaurante y cerca de la playa y la Fortaleza de San Fernando.')
+@section('meta_keywords', 'ofertas hotel Omoa, promociones hotel Omoa, descuentos alojamiento Omoa, ofertas Daphne Breeze, hotel Omoa ofertas')
 
 @push('meta')
     <meta property="og:type" content="website">
